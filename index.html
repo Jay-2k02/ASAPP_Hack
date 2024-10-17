@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Echo Test</h1>
+    <input type="text" id="message" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+    <p id="response"></p>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:5000/echo');
+
+        ws.onopen = () => {
+            console.log('WebSocket connected');
+        };
+
+        ws.onmessage = (event) => {
+            document.getElementById('response').innerText = 'Received: ' + event.data;
+        };
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            ws.send(message);
+        }
+    </script>
+</body>
+</html>
