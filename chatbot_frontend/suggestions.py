@@ -3,6 +3,8 @@ from flask_cors import CORS
 import google.generativeai as genai
 import re  # Import the regular expression module
 
+# generate suggestions to user based on the query 
+# 
 app = Flask(__name__)
 CORS(app, resources={r"/generate": {"origins": "http://localhost:3000"}})
 

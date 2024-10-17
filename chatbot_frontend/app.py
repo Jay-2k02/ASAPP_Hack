@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS  # Import CORS
 from processInputQuery import getFinalAnswer
+from chunkPapers import collection_create
+from query_db import getTopChunks
+from query_db import gemini
 
 app = Flask(__name__)
 
@@ -10,6 +13,11 @@ CORS(app)  # This will allow all origins by default
 # If you want to specify allowed origins, you can do it like this:
 # CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
+@app.route('/')
+def home():
+    return "Hello, Ngrok!"
+
+#retrieves answer to the user query from the RAG model
 @app.route('/api/chat', methods=['POST'])
 def chatbot():
     data = request.get_json()
@@ -17,19 +25,34 @@ def chatbot():
     response = getFinalAnswer(query)
     return jsonify({"response": response})
 
-# Uncomment if you have an index.html to render
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+@app.route('/api/uploadchat',methods=['POST'])
+def uploadchat():
+    data = request.get_json()
+    query = data.get('prompt')
+    topChunks =  getTopChunks(query,uploaded_file[-1])
+    finalResult = gemini(query, topChunks)
+    return jsonify({"response":finalResult})
 
-# def calculate(msg):
-#     return str(int(msg)**2)
+#upload pdf
+@app.route('/api/upload',methods=['POST'])
+def upload_pdf():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part in the request"}), 400
 
-# @socketio.on('message')
-# def handle_message(msg):
-#     print(f"Received message: {msg}")  # Log the message to the server console
-#     ans = calculate(msg)
-#     send(ans, broadcast=True)  # Broadcast the message to all connected clients
+    file = request.files['file']
+
+    # Check if the user has selected a file
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    # Check if the file is a PDF
+    if file and file.filename.endswith('.pdf'):
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
+        collection_name  = f"Uploaded-{file.filename}"
+        pdf_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        uploaded_file.append(collection_name)
+        collection_create(pdf_path,collection_name)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=4444)

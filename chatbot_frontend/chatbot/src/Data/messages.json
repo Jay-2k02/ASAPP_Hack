@@ -6,35 +6,26 @@
       "id": "91f8"
     },
     {
-      "id": "e79a",
-      "text": "How do GLU variants improve transformer?",
-      "sender": "user"
-    },
-    {
-      "id": "7715",
-      "text": "Here are three short and direct user queries related to how GLU variants improve transformers:",
-      "sender": "user"
-    },
-    {
-      "id": "52c9",
-      "sender": "bot"
-    },
-    {
-      "id": "2f06",
+      "id": "3e6c",
       "text": "What are the benefits of using GLU variants in transformers?",
       "sender": "user"
     },
     {
-      "id": "05d5",
+      "id": "7556",
+      "text": "**Advantages of GLU in transformers?**",
+      "sender": "user"
+    },
+    {
+      "id": "3619",
       "sender": "bot"
     },
     {
-      "id": "3bd5",
+      "id": "f3e6",
       "text": "Techniques to prune deep neural networks",
       "sender": "user"
     },
     {
-      "id": "da85",
+      "id": "2669",
       "sender": "bot"
     }
   ]

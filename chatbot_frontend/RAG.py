@@ -19,6 +19,11 @@ from langchain.schema import Document
 from langchain.vectorstores import Qdrant
 import pdfplumber
 
+
+# Data engineering phase 1:
+# Uploading documents to a collection in Qdrant
+# Performing RAG Fusion to get relevant documents
+
 # Constants
 TOP_K = 5
 MAX_DOCS_FOR_CONTEXT = 10
@@ -26,10 +31,8 @@ QDRANT_URL = "https://3511caaa-095e-4332-bfa5-c2e9d296a8af.europe-west3-0.gcp.cl
 QDRANT_API_KEY = "gwvKzGhdrGiTEWH-2-J3OyL3poFcrPMxX2HfvlTb4Jtgcc-GwWgfCg" # Use your Qdrant API key
 QDRANT_COLLECTION_NAME = "RESEARCH-PAPERS-ASAPP"
 
-# Set the Cohere API key as an environment variable
 COHERE_API_KEY = "lb5TT3QgjdHf8yqcIxoFIXtFc5pysCxS2EmfUFFj"  # Use your Cohere API key
 embedding_model = CohereEmbeddings(model="embed-english-v3.0", cohere_api_key=COHERE_API_KEY)
-semantic_chunker_embed_model = FastEmbedEmbeddings(model_name="BAAI/bge-base-en-v1.5")
 
 # Initialize Qdrant client
 qdrant_client = QdrantClient(url=QDRANT_URL, prefer_grpc=True, api_key=QDRANT_API_KEY)

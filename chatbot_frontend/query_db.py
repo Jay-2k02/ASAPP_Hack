@@ -2,6 +2,8 @@ from sentence_transformers import SentenceTransformer
 from qdrant_client import models, QdrantClient
 import google.generativeai as genai
 
+
+
 # Qdrant details
 QDRANT_URL = "https://3511caaa-095e-4332-bfa5-c2e9d296a8af.europe-west3-0.gcp.cloud.qdrant.io:6333"
 QDRANT_API_KEY = "gwvKzGhdrGiTEWH-2-J3OyL3poFcrPMxX2HfvlTb4Jtgcc-GwWgfCg"
@@ -25,9 +27,13 @@ def vector_search(query, collection_name, top_k=8):
     """
     Perform a vector search on the Qdrant collection using an input query.
     
-    :param query: The input query as a string.
-    :param top_k: The number of top chunks to return based on similarity.
-    :return: List of the top relevant chunks.
+    Args:
+        query (str): input query
+        collection_name (str): qdrant collection name
+        top_k (int)
+    
+    Returns
+        results: List of the top relevant chunks.
     """
     # Convert query into a vector
     query_vector = embedder.encode(query).tolist()
@@ -82,8 +88,6 @@ def gemini(query, chunks):
 
 
 def getTopChunks(query, collectionName):
-    # # Example usage
-    # input_query = "What is the goal of LSTM?"
     top_chunks = vector_search(query, collectionName, top_k=8)
     return top_chunks
 

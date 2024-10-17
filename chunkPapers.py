@@ -5,6 +5,10 @@ from qdrant_client import models, QdrantClient
 from sentence_transformers import SentenceTransformer  # Example embedding model (open-source)
 import uuid
 
+# read pdf files and chunk them into pieces
+# upload chunks to Qdrant
+
+
 QDRANT_URL = "https://3511caaa-095e-4332-bfa5-c2e9d296a8af.europe-west3-0.gcp.cloud.qdrant.io:6333"
 QDRANT_API_KEY = "gwvKzGhdrGiTEWH-2-J3OyL3poFcrPMxX2HfvlTb4Jtgcc-GwWgfCg" # Use your Qdrant API key
 #QDRANT_COLLECTION_NAME = "research-papers-chunk-2"
