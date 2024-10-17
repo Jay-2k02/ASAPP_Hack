@@ -82,13 +82,13 @@ def upload_chunks_to_qdrant(chunks,collection_name):
 
 # Example usage
 
-def collection_create(pdf_path,collection_name):
-    create_QDrant_collection(collection_name)
-    #pdf_file_path = "research-papers/20-074.pdf"
-    pdf_file_path = pdf_path
-    chunks = chunk_pdf_text(pdf_file_path)
-    # Upload the chunks to Qdrant
-    upload_chunks_to_qdrant(chunks,collection_name)
+# def collection_create(pdf_path,collection_name):
+#     create_QDrant_collection(collection_name)
+#     #pdf_file_path = "research-papers/20-074.pdf"
+#     pdf_file_path = pdf_path
+#     chunks = chunk_pdf_text(pdf_file_path)
+#     # Upload the chunks to Qdrant
+#     upload_chunks_to_qdrant(chunks,collection_name)
 
 def collection_create(pdf_path,collection_name):
     print("collection create called")
