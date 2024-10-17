@@ -4,6 +4,7 @@ from processInputQuery import getFinalAnswer
 from chunkPapers import collection_create
 from query_db import getTopChunks
 from query_db import gemini
+import os
 
 app = Flask(__name__)
 
@@ -12,6 +13,10 @@ CORS(app)  # This will allow all origins by default
 
 # If you want to specify allowed origins, you can do it like this:
 # CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
+uploaded_file = []
+UPLOAD_FOLDER = './uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def home():
