@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask SocketIO Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script> <!-- Include Socket.IO client -->
+</head>
+<body>
+    <h1>Socket.IO Echo Test</h1>
+    <input type="text" id="message" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+    <p id="response"></p>
+
+    <script>
+        const socket = io(); // Initialize Socket.IO client
+
+        socket.on('connect', () => {
+            console.log('Socket.IO connected');
+        });
+
+        socket.on('message', (data) => {
+            document.getElementById('response').innerText = 'Received: ' + data;
+        });
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (message) { // Check if the message is not empty
+                socket.send(message); // Send the message using Socket.IO
+                document.getElementById('message').value = ''; // Clear the input after sending
+            } else {
+                alert('Please enter a message.'); // Alert if the input is empty
+            }
+        }
+    </script>
+</body>
+</html>
