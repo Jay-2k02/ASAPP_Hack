@@ -67,7 +67,7 @@ def gemini(query, chunks):
     ### Query:
     {query}
     
-    Provide a concise, clear, and informative response as a single paragraph of text.
+    Provide a concise, clear, and informative response as paragraphs of text based on the query. 
     """
     
     # Make the request to generate text
