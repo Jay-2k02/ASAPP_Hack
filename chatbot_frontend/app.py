@@ -1,18 +1,26 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS  # Import CORS
 from processInputQuery import getFinalAnswer
 
 app = Flask(__name__)
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+# Enable CORS for all routes
+CORS(app)  # This will allow all origins by default
 
-@app.route('/api/chat',methods=['POST'])
+# If you want to specify allowed origins, you can do it like this:
+# CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
+@app.route('/api/chat', methods=['POST'])
 def chatbot():
     data = request.get_json()
     query = data.get('prompt')
     response = getFinalAnswer(query)
-    return jsonify({"response":response})
+    return jsonify({"response": response})
+
+# Uncomment if you have an index.html to render
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 # def calculate(msg):
 #     return str(int(msg)**2)
@@ -24,4 +32,4 @@ def chatbot():
 #     send(ans, broadcast=True)  # Broadcast the message to all connected clients
 
 if __name__ == '__main__':
-     app.run(host='127.0.0.1',port=4444)
+    app.run(host='127.0.0.1', port=4444)

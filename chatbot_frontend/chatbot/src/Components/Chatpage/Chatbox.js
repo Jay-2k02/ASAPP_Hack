@@ -65,12 +65,12 @@ useEffect(() => {
 
   const sendRequest = async (input) => {
     try {
-      const response = await axios.post('http://localhost:5000/generate', 
+      const response = await axios.post('http://127.0.0.1:4444/api/chat', 
         { prompt: input } , // Ensure the key matches what the server expects
         { headers: { 'Content-Type': 'application/json' } }
       );      
 
-      console.log (response.data.content);
+      console.log (response.data.response);
       
       const newmsg = {text: input, sender: "user"};
       const resp = await axios.post('http://localhost:3500/messages', newmsg);
@@ -83,7 +83,7 @@ useEffect(() => {
       setTimeout(() => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          {text: response.data.content, sender: 'bot'}
+          {text: response.data.response, sender: 'bot'}
         ]);
       }, 1000);
     }
