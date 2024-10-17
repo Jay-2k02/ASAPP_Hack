@@ -7,16 +7,16 @@ import uuid
 
 QDRANT_URL = "https://3511caaa-095e-4332-bfa5-c2e9d296a8af.europe-west3-0.gcp.cloud.qdrant.io:6333"
 QDRANT_API_KEY = "gwvKzGhdrGiTEWH-2-J3OyL3poFcrPMxX2HfvlTb4Jtgcc-GwWgfCg" # Use your Qdrant API key
-QDRANT_COLLECTION_NAME = "research-papers-chunk-2"
+#QDRANT_COLLECTION_NAME = "research-papers-chunk-2"
 
 # Initialize Qdrant client
 qdrant_client = QdrantClient(url=QDRANT_URL, prefer_grpc=True, api_key=QDRANT_API_KEY)
 
-def create_QDrant_collection():
+def create_QDrant_collection(collectionName):
     """Create Qdrant collection."""
     
     # Define collection parameters
-    collection_name = QDRANT_COLLECTION_NAME
+    collection_name = collectionName
     vector_size = 384  # Size of the embedding vectors
     distance_metric = models.Distance.COSINE  # Distance metric for vector similarity
 
@@ -62,7 +62,7 @@ def chunk_pdf_text(pdf_file, chunk_size=1000, chunk_overlap=100):
 
 
 # Function to upload chunks to Qdrant
-def upload_chunks_to_qdrant(chunks):
+def upload_chunks_to_qdrant(chunks,collection_name):
     
     # Load an open-source embedding model (you can use any model)
     embedder = SentenceTransformer('all-MiniLM-L6-v2')  # Vector size = 384
@@ -76,16 +76,19 @@ def upload_chunks_to_qdrant(chunks):
         point = models.PointStruct(id=str(uuid.uuid4()), vector=chunk_embedding, payload={"text": chunk})
 
         # Upload point to the collection
-        qdrant_client .upsert(collection_name=QDRANT_COLLECTION_NAME, points=[point])
+        qdrant_client .upsert(collection_name=collection_name, points=[point])
     
-    print(f"Uploaded {len(chunks)} chunks to collection '{QDRANT_COLLECTION_NAME}'.")
+    print(f"Uploaded {len(chunks)} chunks to collection '{collection_name}'.")
 
 # Example usage
 
-pdf_file_path = "research-papers/20-074.pdf"
-chunks = chunk_pdf_text(pdf_file_path)
-# Upload the chunks to Qdrant
-upload_chunks_to_qdrant(chunks)
+def collection_create(pdf_path,collection_name):
+    create_QDrant_collection(collection_name)
+    #pdf_file_path = "research-papers/20-074.pdf"
+    pdf_file_path = pdf_path
+    chunks = chunk_pdf_text(pdf_file_path)
+    # Upload the chunks to Qdrant
+    upload_chunks_to_qdrant(chunks,collection_name)
 
 '''
 # Print all chunks
