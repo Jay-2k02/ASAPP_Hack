@@ -10,6 +10,19 @@
   flex-direction: column; /* Stack messages and input vertically */
 }
 
+.suggestions-container {
+  position: fixed; /* Keep the suggestions fixed above the input box */
+  bottom: 60px; /* Position it just above the input container */
+  left: 0;
+  width: 100%; /* Full width of the screen */
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 1rem;
+  background: #e1e1e1; /* Background matches the chat area */
+  z-index: 999; /* Ensure it stays on top */
+  border-top: 1px solid #ddd; /* Divider line */
+}
+
 /* Messages container */
 .messages {
   flex: 1; /* Allow messages area to grow */
