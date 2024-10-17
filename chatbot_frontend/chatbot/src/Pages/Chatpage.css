@@ -1,0 +1,15 @@
+/* Chatpage.css */
+
+.chat-page {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack elements vertically */
+  height: 100vh; /* Full height of the viewport */
+}
+
+.chat-container {
+  flex: 1; /* Take up remaining space */
+  display: flex; /* Enable flexbox for the container */
+  flex-direction: column; /* Stack chat box and input vertically */
+  justify-content: flex-end; /* Position chat box at the bottom */
+  padding: 1rem; /* Optional padding around the container */
+}

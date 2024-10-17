@@ -1,0 +1,50 @@
+/* Message.css */
+
+/* Container for the messages */
+.messages {
+    display: flex;
+    flex-direction: column; /* Arrange messages vertically */
+    padding: 10px;
+    height: 400px; /* Set a fixed height */
+    overflow-y: auto; /* Enable scrolling if needed */
+}
+
+/* Styles for individual messages */
+.message {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effect */
+}
+
+/* User messages (right-aligned) */
+.message.user {
+    background-color: #007bff; /* Blue background for user messages */
+    color: #fff; /* White text */
+    align-self: flex-end; /* Align user messages to the right */
+    border-bottom-right-radius: 0; /* Sharp corner on the right */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Shadow effect */
+}
+
+/* Bot messages (center-aligned) */
+.message.bot {
+    background-color: #504c4c; /* Light grey background for bot messages */
+    color: #eee8e8; /* Dark text */
+    align-self: center; /* Center-align bot messages */
+    border-bottom-left-radius: 0; /* Sharp corner on the left */
+    box-shadow: 0 4px 10px rgba(233, 236, 239, 0.5); /* Shadow effect */
+}
+
+/* Hover effect for messages */
+.message:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 600px) {
+    .message {
+        max-width: 90%; /* Increase width on smaller screens */
+    }
+}
