@@ -2,11 +2,29 @@ import React, { useEffect, useState } from 'react';
 import './Chatbox.css';
 import Message from './Message'; // Import the Message component
 import axios from 'axios';
-
+import SuggestionBubble from './SuggestionBubble';
 
 function ChatBox() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  
+  /* Suggestion contents */
+
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleSuggestionClick = (suggestion) => {
+    // Handle the suggestion click, e.g., pre-fill the input with the suggestion
+    console.log(`Suggestion clicked: ${suggestion}`);
+    setInput(suggestion);
+  };
+
+  const handleSuggestionClose = (index) => {
+    setSuggestions(suggestions.filter((_, i) => i !== index));
+  };
+
+  /* Suggestion contents */
+
+
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -22,6 +40,28 @@ function ChatBox() {
     fetchMessages();
   }, []);
 
+/* Suggestion bubble code*/
+
+useEffect(() => {
+  const fetchSuggestion = async () => {
+    try {
+      const response = await axios.post('http://localhost:4500/generate',
+        { prompt: input },
+        { headers: { 'Content-Type': 'application/json' }}
+      );
+      // Update this line to use 'suggestions' instead of 'content'
+      setSuggestions(response.data.suggestions);
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+
+  if (input){
+    fetchSuggestion();
+  }
+}, [input]);
+
+/*Suggestion bubble code*/
 
   const sendRequest = async (input) => {
     try {
@@ -104,6 +144,18 @@ function ChatBox() {
 
   return (
     <div className="chat-box">
+      <div className="suggestions-container">
+        {suggestions.map((suggestion, index) => (
+          <SuggestionBubble 
+            key={index} 
+            text={suggestion} 
+            onClick={() => handleSuggestionClick(suggestion)}
+            onClose={() => handleSuggestionClose(index)} 
+          />
+        ))}
+      </div>
+
+
       <div className="messages">
         {messages.map((message, index) => (
           <Message 
@@ -113,6 +165,8 @@ function ChatBox() {
           />
         ))}
       </div>
+
+
       <div className="input-container">
         <input
           type="text"
