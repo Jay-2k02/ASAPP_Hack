@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from processInputQuery import getFinalAnswer
 
 app = Flask(__name__)
@@ -9,9 +9,10 @@ app = Flask(__name__)
 
 @app.route('/api/chat',methods=['POST'])
 def chatbot():
-    query = request.data.decode('utf-8')
-    response  = getFinalAnswer(query)
-    return response
+    data = request.get_json()
+    query = data.get('prompt')
+    response = getFinalAnswer(query)
+    return jsonify({"response":response})
 
 # def calculate(msg):
 #     return str(int(msg)**2)
