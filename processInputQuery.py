@@ -1,4 +1,4 @@
-from RAG_Fusion import getTopKDocs
+from RAG import getTopKDocs
 from query_db import getTopChunks
 from query_db import gemini
 
@@ -17,9 +17,9 @@ def getFinalAnswer(query):
     finalResult = gemini(query, totalChunks)
     return finalResult
 
-print("--------------------------")
-print("FINAL ANSWER")
-#ans = getFinalAnswer("What are Transformers?")
-ans = getFinalAnswer("How do GLU variants improve transformer?")
-#ans = getFinalAnswer("Techniques to prune deep neural networks")
-print(ans)
+# print("--------------------------")
+# print("FINAL ANSWER")
+# #ans = getFinalAnswer("What are Transformers?")
+# ans = getFinalAnswer("How do GLU variants improve transformer?")
+# #ans = getFinalAnswer("Techniques to prune deep neural networks")
+# print(ans)
