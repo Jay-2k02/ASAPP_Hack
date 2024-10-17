@@ -164,80 +164,6 @@ def create_QDrant_collection():
     print(f"Collection '{collection_name}' created successfully.")
 
 
-'''
-def upload_chunks_to_QDrant(documents):
-    """Upload document chunks to Qdrant."""
-    records_to_upload = []
-    for idx, chunk in enumerate(documents):
-        content = chunk.page_content
-        vector = embedding_model.encode(content).tolist()
-
-        record = models.PointStruct(
-            id=idx,
-            vector=vector,
-            payload={"page_content": content}
-        )
-        records_to_upload.append(record)
-
-    qdrant_client.upload_points(
-        collection_name=QDRANT_COLLECTION_NAME,
-        points=records_to_upload
-    )
-    return
-'''
-# def upload_chunks_to_QDrant(documents):
-#     records_to_upload = []
-#     for idx, chunk in enumerate(documents):
-#         content = chunk.page_content
-#         # Change how you call to get the embedding
-#         vector = embedding_model.embed_documents([content])[0]  # Check if this is the correct call
-
-#         record = models.PointStruct(
-#             id=idx,
-#             vector=vector,
-#             payload={"page_content": content}
-#         )
-#         records_to_upload.append(record)
-
-#     qdrant_client.upload_points(
-#         collection_name=QDRANT_COLLECTION_NAME,
-#         points=records_to_upload
-#     )
-#     return
-
-# def upload_chunks_to_QDrant(documents: list[Document]):
-#     """Uploads chunked documents to Qdrant for vector search.
-    
-#     Args:
-#         documents (list[Document]): List of chunked Document objects.
-#     """
-#     records_to_upload = []
-    
-#     for idx, chunk in enumerate(documents):
-#         content = chunk.page_content
-#         metadata = chunk.metadata
-        
-#         # Get vector embedding for the chunk content
-#         vector = embedding_model.embed_documents([content])[0]  # Ensure embedding is a list
-        
-#         # Create a record for Qdrant
-#         record = models.PointStruct(
-#             id=idx,  # Use idx or a unique identifier
-#             vector=vector,
-#             payload={
-#                 "page_content": content,
-#                 "filename": metadata.get("filename")
-#             }  # You can add more metadata here if needed
-#         )
-#         records_to_upload.append(record)
-    
-#     # Upload records in batches to Qdrant
-#     qdrant_client.upload_points(
-#         collection_name=QDRANT_COLLECTION_NAME,
-#         points=records_to_upload
-#     )
-#     return
-
 def ans_retriever(query: str) -> list[Document]:
     """RRF retriever
 
@@ -292,7 +218,7 @@ if __name__ == "__main__":
 
  
     query = """
-        What are the paper related to sequence to sequence learning
+        DistilBERT
     """
    
     retrieved_documents = ans_retriever(query)
