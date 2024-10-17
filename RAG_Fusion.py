@@ -24,7 +24,7 @@ TOP_K = 5
 MAX_DOCS_FOR_CONTEXT = 10
 QDRANT_URL = "https://3511caaa-095e-4332-bfa5-c2e9d296a8af.europe-west3-0.gcp.cloud.qdrant.io:6333"
 QDRANT_API_KEY = "gwvKzGhdrGiTEWH-2-J3OyL3poFcrPMxX2HfvlTb4Jtgcc-GwWgfCg" # Use your Qdrant API key
-QDRANT_COLLECTION_NAME = "RESEARCH-PAPERS"
+QDRANT_COLLECTION_NAME = "RESEARCH-PAPERS-ASAPP"
 
 # Set the Cohere API key as an environment variable
 COHERE_API_KEY = "lb5TT3QgjdHf8yqcIxoFIXtFc5pysCxS2EmfUFFj"  # Use your Cohere API key
@@ -67,7 +67,9 @@ def upload_chunks_to_qdrant(documents):
         record = models.PointStruct(
             id=idx,
             vector=vector,
-            payload={"page_content": content}  # Include other metadata if needed
+            payload={
+                "id": idx,
+                "page_content": content}  # Include other metadata if needed
         )
         records_to_upload.append(record)
 
@@ -197,35 +199,36 @@ def ans_retriever(query: str) -> list[Document]:
     # Invoke the chain with the query
     result = chain.invoke({"query": query})
 
-    # Print the top K matched documents
-    print("Top K Matched Documents:")
-    for idx, document in enumerate(result[:TOP_K]):
-        print(f"Document {idx + 1}:\nFilename: {document.metadata.get('filename', 'N/A')}, Content: {document.page_content[:500]}...\n")
+    # Extract document IDs from the payload (metadata)
+    doc_ids = [doc.metadata.get('_id') for doc in result[:TOP_K]]
+    
 
-    return result
+    # Print the top K matched documents
+    #print("Top K Matched Documents:")
+    #for idx, document in enumerate(result[:TOP_K]):
+    #   print(f"Document {idx + 1}:\nFilename: {document.metadata.get('filename', 'N/A')}, Content: {document.page_content[:500]}...\n")
+
+    return result, doc_ids
 
 
 if __name__ == "__main__":
     
-    #create_QDrant_collection()
+    create_QDrant_collection()
 
-    # Example usage
-    # directory = 'papers'  # Directory containing the .txt files
-    # documents = read_pdf_files(directory)
-    # print("files read successfully")
-    # upload_chunks_to_qdrant(documents)
-    # print("Documents uploaded successfully")
+    #Example usage
+    directory = 'research-papers'  # Directory containing the .txt files
+    documents = read_pdf_files(directory)
+    print("files read successfully")
+    upload_chunks_to_qdrant(documents)
+    print("Documents uploaded successfully")
 
- 
-    query = """
-        DistilBERT
-    """
-   
-    retrieved_documents = ans_retriever(query)
 
-    '''
-    # Print the retrieved documents
-    for doc in retrieved_documents:
-        print(doc)
-        # print(f"Filename: {doc.metadata['filename']}, Content: {doc.page_content[:100]}...")  # Print first 100 characters
-'''
+def getTopKDocs(query):
+
+    retrieved_documents, doc_ids = ans_retriever(query)
+    
+    return doc_ids
+
+    
+    
+

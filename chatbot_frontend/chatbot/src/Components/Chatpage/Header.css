@@ -1,0 +1,60 @@
+.header {
+  position: fixed; /* Keep the header fixed at the top */
+  top: 0; /* Align to the top of the viewport */
+  left: 0; /* Align to the left */
+  width: 98%; /* Full width */
+  background-color: #131212; /* Background color of header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Space links evenly */
+  align-items: center; /* Center items vertically */
+  padding: 0.5rem 1rem; /* Padding inside the header */
+  overflow: hidden; /* Prevent overflow */
+}
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .logo-text {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #007bff, #00c6ff, #ff6ec7);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-animation 5s ease infinite;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  
+  
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover {
+    color: #0056b3;
+  }
+  

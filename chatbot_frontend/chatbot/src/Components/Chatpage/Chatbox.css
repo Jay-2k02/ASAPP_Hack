@@ -1,0 +1,63 @@
+/* Chat box styles */
+.chat-box {
+  width: calc(100% - 20px); /* Full width minus padding */
+  height: calc(100vh - 60px); /* Full height of the viewport minus input container height */
+  margin: 0 auto; /* Center chat box */
+  padding-top: 60px; /* Add padding to the top to avoid overlap with header */
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Remove shadow for full screen */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack messages and input vertically */
+}
+
+/* Messages container */
+.messages {
+  flex: 1; /* Allow messages area to grow */
+  padding: 1rem; /* Inner padding */
+  display: flex; /* Align messages in a column */
+  flex-direction: column; /* Stack messages vertically */
+  overflow-y: auto; /* Scroll if messages overflow */
+  background: #e1e1e1; /* Background for the messages area */
+  margin-top: 10px; /* Optional margin for spacing */
+  margin-bottom: 40px;
+}
+
+/* Input container */
+.input-container {
+  position: fixed; /* Fix the input container at the bottom of the viewport */
+  bottom: 0; /* Align to the bottom */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width of the screen */
+  padding: 0.5rem; /* Add padding around the container */
+  background-color: #1a1a1a; /* Dark grey background */
+  border-top: 1px solid #ddd; /* Light border at the top */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+/* Chat input field */
+.chat-input {
+  flex: 1; /* Allow input to grow */
+  padding: 0.75rem; /* Padding inside the input */
+  border: 1px solid #ddd; /* Light border around the input */
+  border-radius: 20px; /* Rounded corners */
+  margin-right: 0.5rem; /* Space between input and button */
+  outline: none; /* Remove default outline */
+  font-size: 1rem; /* Font size for the input text */
+  width: calc(100% - 300px); /* Make input field occupy the remaining width */
+}
+
+/* Send button styles */
+.send-button {
+  background-color: #007bff; /* Blue background */
+  color: #ffffff; /* White text */
+  padding: 0.75rem 1rem; /* Padding for the button */
+  border: none; /* Remove default border */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.send-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
