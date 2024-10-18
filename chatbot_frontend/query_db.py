@@ -23,6 +23,11 @@ qdrant_client = QdrantClient(url=QDRANT_URL, prefer_grpc=True, api_key=QDRANT_AP
 # Load the same embedding model used for chunking
 embedder = SentenceTransformer('all-MiniLM-L6-v2')  # Vector size = 384
 
+mapFile= 'researchPapersMap.txt'  # Replace with your actual file path
+# Read the contents of the file
+with open(mapFile, 'r', encoding='utf-8') as file:
+    idToPaperMap = file.read()
+
 def vector_search(query, collection_name, top_k=8):
     """
     Perform a vector search on the Qdrant collection using an input query.
@@ -85,7 +90,43 @@ def gemini(query, chunks):
     else:
         return "No valid content was returned. Please adjust your prompt or try again."
 
+def geminiWithReferences(query, chunks, docIds):
+    """Generates an answer using Google's Generative AI (Gemini) based on input query and context chunks."""
 
+    # Join the top_chunks into a single context string
+    context = "\n".join([f"{i+1}. {chunk}" for i, chunk in enumerate(chunks)])
+    ids = ' '.join(str(num) for num in docIds)
+    
+    # Define the prompt with clear instructions for a paragraph answer
+    prompt = f"""
+    You are a highly knowledgeable assistant. Based on the given context, please provide a well-crafted answer to the query below. Use the provided information from the context as reference material.
+    
+    ### Context:
+    {context}
+    
+    ### Query:
+    {query}
+
+    ### Research Paper to ID map
+    {idToPaperMap}
+    
+    ### Relevant Document IDs
+    {ids}
+
+    The relevant document ids from which the context was taken from is given. The id to paper title mapping is also given.
+    Provide a concise, clear, and informative response as paragraphs of text based on the query. Also, take the corresponding paper title
+    from the provided Research Paper to ID map by referring the Relevant document Ids and put them as references at the end of the answer.
+    Put all paper names from the Relevant Document IDs.
+    """
+    
+    # Make the request to generate text
+    response = model.generate_content(prompt)
+
+    # Check if the response contains valid content
+    if response.candidates and len(response.candidates) > 0:
+        return response.text    # Return the generated text as a string
+    else:
+        return "No valid content was returned. Please adjust your prompt or try again."
 
 def getTopChunks(query, collectionName):
     top_chunks = vector_search(query, collectionName, top_k=8)

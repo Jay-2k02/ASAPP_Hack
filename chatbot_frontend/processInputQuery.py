@@ -1,6 +1,6 @@
 from RAG import getTopKDocs
 from query_db import getTopChunks
-from query_db import gemini
+from query_db import gemini, geminiWithReferences
 
 # orchestrates the two-level RAG Filtering
 # gets top k (5) research papers based on the query
@@ -23,7 +23,8 @@ def getFinalAnswer(query):
         topChunks = getTopChunks(query, collectionName + str(id))
         totalChunks.extend(topChunks)
     
-    finalResult = gemini(query, totalChunks)
+    #finalResult = gemini(query, totalChunks)
+    finalResult = geminiWithReferences(query, totalChunks, doc_ids)
     return finalResult
 
 # print("--------------------------")

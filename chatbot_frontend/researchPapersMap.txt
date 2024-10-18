@@ -1,0 +1,21 @@
+id - paper_title
+0 - Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer
+1 - Sequence to Sequence Learning with Neural Networks
+2 - OUTRAGEOUSLY LARGE NEURAL NETWORKS: THE SPARSELY-GATED MIXTURE-OF-EXPERTS LAYER
+3 - Learning to Prune Deep Neural Networks via Layer-wise Optimal Brain Surgeon
+4 - Attention Is All You Need
+5 - SEARCHING FOR ACTIVATION FUNCTIONS
+6 - Self-Attention with Relative Position Representations
+7 - BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
+8 - Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context
+9 - Augmenting Self-attention with Persistent Memory
+10 - Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism
+11 - DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter
+12 - Root Mean Square Layer Normalization
+13 - BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension
+14 - Fast Transformer Decoding: One Write-Head is All You Need
+15 - Scaling Laws for Neural Language Models
+16 - GLU Variants Improve Transformer
+17 - LadaBERT: Lightweight Adaptation of BERT through Hybrid Model Compression
+18 - Upor Down? Adaptive Rounding for Post-Training Quantization
+19 - TRP: Trained Rank Pruning for Efficient Deep Neural Networks
