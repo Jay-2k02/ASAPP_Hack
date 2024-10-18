@@ -4,29 +4,6 @@
       "text": "Hello, how can I help you?",
       "sender": "bot",
       "id": "91f8"
-    },
-    {
-      "id": "3e6c",
-      "text": "What are the benefits of using GLU variants in transformers?",
-      "sender": "user"
-    },
-    {
-      "id": "7556",
-      "text": "**Advantages of GLU in transformers?**",
-      "sender": "user"
-    },
-    {
-      "id": "3619",
-      "sender": "bot"
-    },
-    {
-      "id": "f3e6",
-      "text": "Techniques to prune deep neural networks",
-      "sender": "user"
-    },
-    {
-      "id": "2669",
-      "sender": "bot"
     }
   ]
 }
