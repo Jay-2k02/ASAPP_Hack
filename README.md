@@ -85,6 +85,19 @@ json-server -p 3500 -w src\Data\messages.json
 ```
 The web app will run on localhost:3000 
 
+### Tech Stack Used
+
+- **Front End**:
+  - React JS
+
+- **Back End**:
+  - Flask
+
+- **LLM Stack**:
+  - Gemini APIs
+  - Cohere API
+  - Qdrant Vector DB
+
 ### Future Enhancements
 
 - **Implementing Advanced Chunking Techniques**:
