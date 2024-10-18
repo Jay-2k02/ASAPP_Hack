@@ -50,8 +50,7 @@ The Demo video link can be found [Here](https://drive.google.com/drive/folders/1
 - **Scalability**:
   - The architecture is designed to be easily scalable, allowing for an increase in the database size as additional resources become available.
   - The integration with Qdrant and Cohere embeddings ensures smooth handling of larger datasets without significant structural changes.
-HOw do glu varience improve transformers
-techniques to prune depp nural networks
+
 
 ## API Endpoint
 ```
